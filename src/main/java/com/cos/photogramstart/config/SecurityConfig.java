@@ -1,13 +1,20 @@
 package com.cos.photogramstart.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @EnableWebSecurity //해당파일로 시큐리티를 활성화
 @Configuration // IoC
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Bean
+    public BCryptPasswordEncoder encode(){
+        return new BCryptPasswordEncoder();
+    }
+
     @Override  //16. 해당주소들은 인증이  나머지는 19. 로그인이 되면 로그인페이지로 가서 로그인이 되면 정상으로 보인다.
     protected void configure(HttpSecurity http)throws Exception{
         //csrf토큰 비활성화 시키기
